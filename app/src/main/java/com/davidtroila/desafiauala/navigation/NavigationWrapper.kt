@@ -9,8 +9,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.davidtroila.desafiauala.navigation.screens.CityList
 import com.davidtroila.desafiauala.navigation.screens.MapView
-import com.davidtroila.desafiauala.presentation.CityListScreen
-import com.davidtroila.desafiauala.presentation.MapScreen
+import com.davidtroila.desafiauala.ui.screens.CityListScreen
+import com.davidtroila.desafiauala.ui.screens.MapScreen
 
 @Composable
 fun NavigationWrapper() {

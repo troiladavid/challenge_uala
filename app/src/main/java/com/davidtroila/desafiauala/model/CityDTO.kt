@@ -6,5 +6,6 @@ data class CityDTO(
     var name: String,
     var lon: Double,
     var lat: Double,
-    var selected :Boolean = false
+    var selected :Boolean = false,
+    var isFavorite: Boolean = false
 )

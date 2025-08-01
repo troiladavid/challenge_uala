@@ -11,17 +11,25 @@ class CityRepository @Inject constructor(
     private val cityDao: CityDao,
     @ApplicationContext private val context: Context
 ) {
-    suspend fun getCities(): List<CityDTO> {
-        if (cityDao.getAll().isNotEmpty()) return getAllCities()
+    suspend fun getCities(limit: Int, offset: Int): List<CityDTO> {
+        if (cityDao.getAll().isNotEmpty()) return getCitiesPaged(limit, offset, false)
 
         val json = context.assets.open("cities.json").bufferedReader().use { it.readText() }
 
         val cities: List<CityEntity> = Gson().fromJson(json, object : TypeToken<List<CityEntity>>() {}.type)
         cityDao.insertAll(cities)
-        return getAllCities()
+        return getCitiesPaged(limit, offset, false)
     }
 
-    suspend fun getAllCities(): List<CityDTO> = cityDao.getAll().map { it.toDTO() }
+    //suspend fun getAllCities(): List<CityDTO> = cityDao.getAll().map { it.toDTO() }
+    suspend fun getCitiesPaged(limit: Int, offset: Int, includeFav: Boolean) = cityDao.getCitiesPaged(limit, offset, includeFav).map { it.toDTO() }
 
-    suspend fun filterCities(query: String) = cityDao.searchCities(query).map { it.toDTO() }
+    suspend fun filterCities(query: String, includeFav: Boolean) = cityDao.searchCities(query, includeFav).map { it.toDTO() }
+
+    suspend fun setFavorite(cityId: Int): CityDTO {
+        val cityEntity = cityDao.getCity(cityId)
+        cityEntity.favorite = !cityEntity.favorite
+        cityDao.setFavorite(cityEntity)
+        return cityEntity.toDTO()
+    }
 }

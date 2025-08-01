@@ -1,4 +1,4 @@
-package com.davidtroila.desafiauala.presentation
+package com.davidtroila.desafiauala.ui.screens
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
