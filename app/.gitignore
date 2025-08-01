@@ -1,0 +1,38 @@
+# Built files and directories
+/build/
+.gradle/
+/local.properties
+/captures/
+.externalNativeBuild/
+.cxx/
+
+# Android Studio specific files
+.idea/workspace.xml
+.idea/libraries/
+.idea/caches/
+.idea/modules.xml
+.idea/gradle.xml
+.idea/compiler.xml
+.idea/vcs.xml
+.idea/assetWizardSettings.xml
+.idea/jarRepositories.xml
+.idea/codeStyles/
+.idea/dictionaries/
+.idea/runConfigurations/
+.idea/inspectionProfiles/
+
+# Crashlytics/Fabric files
+fabric/
+
+# Keystore files (sensitive information)
+*.jks
+*.keystore
+
+# Log files
+*.log
+
+# macOS specific files
+.DS_Store
+
+# Windows specific files
+Thumbs.db
