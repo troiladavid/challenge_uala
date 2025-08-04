@@ -17,8 +17,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.davidtroila.desafiouala.R
 
 @Composable
 fun ErrorComponent(onRetry: () -> Unit) {
@@ -34,10 +36,10 @@ fun ErrorComponent(onRetry: () -> Unit) {
             modifier = Modifier.size(200.dp),
             contentScale = ContentScale.Crop
         )
-        Text(text = "Hubo un error al cargar los datos", fontSize = 20.sp)
+        Text(text = stringResource(id = R.string.error_component_message), fontSize = 20.sp)
         Spacer(modifier = Modifier.height(20.dp))
         Button(onClick = onRetry) {
-            Text(text = "Reintentar", fontSize = 16.sp)
+            Text(text = stringResource(id = R.string.error_component_retry_button_label), fontSize = 16.sp)
         }
     }
 
