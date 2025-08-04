@@ -1,4 +1,4 @@
-package com.davidtroila.desafiauala.presentation
+package com.davidtroila.desafiauala.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,6 +18,9 @@ import javax.inject.Inject
 @HiltViewModel
 class CityViewModel @Inject constructor(private val repository: CityRepository): ViewModel() {
 
+    private val _isLoading = MutableStateFlow(true)
+    val loading: StateFlow<Boolean> = _isLoading
+
     private val _cities = MutableStateFlow<List<CityDTO>>(emptyList())
     val cities: StateFlow<List<CityDTO>> = _cities
 
@@ -27,14 +30,14 @@ class CityViewModel @Inject constructor(private val repository: CityRepository):
     private val _query = MutableStateFlow("")
     val query: StateFlow<String> = _query
 
-    private val _error = MutableStateFlow<String?>(null)
-    val error: StateFlow<String?> = _error
+    private val _error = MutableStateFlow(false)
+    val error: StateFlow<Boolean> = _error
 
     private val _showOnlyFav = MutableStateFlow(false)
     val showOnlyFav: StateFlow<Boolean> = _showOnlyFav
 
     private var currentOffset = 0
-    private val pageSize = 30
+    private val pageSize = 50
     private var isLoading = false
     private var allLoaded = false
 
@@ -42,24 +45,34 @@ class CityViewModel @Inject constructor(private val repository: CityRepository):
         observeSearch()
     }
 
-    fun init() {
+    fun loadCities() {
         try {
-            viewModelScope.launch(Dispatchers.IO) {
-                _cities.value = repository.getCities(pageSize, currentOffset)
+            if (_cities.value.isEmpty()) {
+                viewModelScope.launch(Dispatchers.IO) {
+                    _isLoading.value = true
+                    _cities.value = repository.getCities(pageSize, currentOffset)
+                    _isLoading.value = false
+                    _error.value = false
+                }
             }
         } catch (e: Exception) {
-            _error.value = e.localizedMessage ?: "Unknown error"
+            _isLoading.value = false
+            _error.value = true
         }
     }
 
     fun onCitySelected(city: CityDTO) {
+        city.selected = !city.selected
         _cities.update { currentList ->
             currentList.map {
-                if (it.id == city.id) it.copy(selected = !city.selected)
-                else it.copy(selected = false)
+                if (it.id == city.id) {
+                    it.copy(selected = city.selected)
+                } else {
+                    it.copy(selected = false)
+                }
             }
         }
-        _selectedCity.value = city
+        _selectedCity.value = if (city.selected) city else null
     }
 
     fun onQueryChanged(query: String) {
@@ -95,14 +108,22 @@ class CityViewModel @Inject constructor(private val repository: CityRepository):
                 if (newItems.isEmpty()) {
                     allLoaded = true
                 } else {
-                    _cities.value = if (currentOffset > 0) _cities.value + newItems else newItems
+                    val newCities = if (currentOffset > 0) _cities.value + newItems else newItems
+                    val selectedId = newCities.firstOrNull { it.id == _selectedCity.value?.id }?.id
+                    if (selectedId == null) {
+                        _selectedCity.value = null
+                    } else {
+                        newCities.first { it.id == selectedId }.selected = true
+                    }
+                    _cities.value = newCities
                     currentOffset += pageSize
+
                 }
             } else {
                 currentOffset = 0
                 allLoaded = false
                 _cities.value = repository.filterCities(query, _showOnlyFav.value)
-            }
+                if (!_cities.value.any { it.id == _selectedCity.value?.id }) _selectedCity.value = null            }
             isLoading = false
         }
     }

@@ -9,14 +9,14 @@ plugins {
 
 android {
     namespace = "com.davidtroila.desafiouala"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.davidtroila.desafiouala"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -79,6 +79,8 @@ dependencies {
     implementation(libs.maps.compose)
     implementation(libs.play.services.maps)
     testImplementation(libs.junit)
+    testImplementation(libs.io.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))

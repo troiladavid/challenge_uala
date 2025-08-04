@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -27,21 +28,26 @@ fun SearchBarComponent(
 ) {
     val favIcon = if (isShowingFav) Icons.Default.Favorite else Icons.Default.FavoriteBorder
 
-    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceEvenly) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
         OutlinedTextField(
             value = query,
             onValueChange = {
                 onQueryChanged(it)
             },
             label = { Text("Filter") },
-            modifier = Modifier.
-                padding(start = 16.dp)
-                .weight(1F),
+            modifier = Modifier
+                .padding(start = 16.dp)
+                .weight(1F)
+                .testTag("search_field"),
             singleLine = true,
             shape = RoundedCornerShape(100.dp),
             leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) }
         )
         IconButton(
+            modifier = Modifier.testTag("search_fav_icon"),
             onClick = {
                 onShowFavClicked()
             }

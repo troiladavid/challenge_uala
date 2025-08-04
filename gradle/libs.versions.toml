@@ -17,6 +17,8 @@ hiltNavigationCompose = "1.2.0"
 ksp-version = "1.9.0-1.0.12"
 maps-compose = "4.4.1"
 play-services-maps = "19.2.0"
+mock = "1.13.5"
+kotlinx-coroutines-test = "1.7.3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -45,6 +47,8 @@ navigation-compose = { module = "androidx.navigation:navigation-compose" , versi
 kotlin-serialization = {module ="org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization" }
 maps-compose = {module ="com.google.maps.android:maps-compose", version.ref = "maps-compose" }
 play-services-maps = {module ="com.google.android.gms:play-services-maps", version.ref = "play-services-maps" }
+io-mockk = {module= "io.mockk:mockk" ,version.ref= "mock"}
+kotlinx-coroutines-test = {module= "org.jetbrains.kotlinx:kotlinx-coroutines-test" ,version.ref= "kotlinx-coroutines-test"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

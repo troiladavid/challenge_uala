@@ -21,7 +21,6 @@ class CityRepository @Inject constructor(
         return getCitiesPaged(limit, offset, false)
     }
 
-    //suspend fun getAllCities(): List<CityDTO> = cityDao.getAll().map { it.toDTO() }
     suspend fun getCitiesPaged(limit: Int, offset: Int, includeFav: Boolean) = cityDao.getCitiesPaged(limit, offset, includeFav).map { it.toDTO() }
 
     suspend fun filterCities(query: String, includeFav: Boolean) = cityDao.searchCities(query, includeFav).map { it.toDTO() }
