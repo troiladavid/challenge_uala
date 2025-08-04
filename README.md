@@ -71,7 +71,7 @@ Mobile coding challenge from Uala for open mobile developer position
 
 ##  Notes
 
-It's one of my first experiences with jetpack compose besides online courses. The UI's are not the best and I kept to the minimum consulting to tools such as IAs.
+It's one of my first experiences with jetpack compose besides online courses and documentation. The UI's are not the best and I kept to the minimum consulting to tools such as IAs.
 I preferred to deliver a not so good jetpack compose code so you can se where are my flaws in this technology and check where i need to improve.
 
 If possible, I would appreciate a feedback on the jetpack compose side. I will help me a lot to improve my skills in this area.
