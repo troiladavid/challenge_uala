@@ -17,7 +17,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.davidtroila.desafiouala.R
 
 @Composable
 fun SearchBarComponent(
@@ -37,7 +39,7 @@ fun SearchBarComponent(
             onValueChange = {
                 onQueryChanged(it)
             },
-            label = { Text("Filter") },
+            label = { Text(stringResource(id = R.string.search_filter_label)) },
             modifier = Modifier
                 .padding(start = 16.dp)
                 .weight(1F)

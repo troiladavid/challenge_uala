@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Desafío Uala</string>
+    <string name="loading_cities_label">Cargando ciudades...</string>
+    <string name="search_filter_label">Filtrar</string>
+    <string name="city_info_city">Ciudad</string>
+    <string name="city_info_country">País</string>
+    <string name="city_info_coordinates">Coordenadas</string>
+    <string name="city_info_lat_s_lon_s">Lat: %s1 - Long: %s2</string>
+    <string name="map_screen_topbar_title">Detalle de ciudad</string>
+    <string name="error_component_message">Hubo un error al cargar los datos</string>
+    <string name="error_component_retry_button_label">Reintentar</string>
 </resources>
