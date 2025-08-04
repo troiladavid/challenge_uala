@@ -1,23 +1,37 @@
 package com.davidtroila.desafiauala.data
 
+import com.davidtroila.desafiauala.model.CountryDTO
 import com.google.gson.annotations.SerializedName
 
 data class CityResponse(
-    @SerializedName("_id")
-    val id: Double,
-    @SerializedName("country")
-    val country: String,
     @SerializedName("name")
-    val name: String,
-    @SerializedName("coord")
-    val coordinates: Coordinate
+    val name: Name,
+    @SerializedName("cca2")
+    val code: String,
+    @SerializedName("region")
+    val region: String? = null,
+    @SerializedName("subregion")
+    val subregion: String? = null,
+    @SerializedName("translations")
+    val translations: Map<String, TranslatedName>
 ) {
-    data class Coordinate(
-        @SerializedName("lon")
-        val longitude: Double,
-        @SerializedName("lat")
-        val latitude: Double
+    data class TranslatedName(
+        val official: String,
+        val common: String
     )
 
+    data class Name(
+        @SerializedName("common")
+        val common: String,
 
+        @SerializedName("official")
+        val official: String
+    )
+
+    fun toDTO() = CountryDTO(
+        officialName = translations["spa"]?.official ?: name.official,
+        commonName = translations["spa"]?.common ?: name.common,
+        region = region,
+        subregion = subregion
+    )
 }

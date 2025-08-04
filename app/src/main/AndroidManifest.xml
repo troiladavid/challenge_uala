@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DesafíoUala"
-        tools:targetApi="31">
+        tools:targetApi="35">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA4eaFa0HcTXzLFBI3gkSL48uuVhVrl49E" />

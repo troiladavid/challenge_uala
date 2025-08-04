@@ -17,7 +17,7 @@ import java.io.File
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    private const val BASE_URL = "https://gist.githubusercontent.com/hernan-uala/"
+    private const val BASE_URL = "https://restcountries.com/v3.1/"
 
     @Provides
     fun provideOkHttpClient(@ApplicationContext context: Context): OkHttpClient {

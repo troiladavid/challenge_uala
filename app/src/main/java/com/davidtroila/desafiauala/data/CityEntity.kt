@@ -1,5 +1,6 @@
 package com.davidtroila.desafiauala.data
 
+import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.Index
@@ -12,6 +13,8 @@ data class CityEntity (
     val localId: Int,
     val _id: Int,
     val country: String,
+    @ColumnInfo(name = "favorite", defaultValue = "0")
+    var favorite: Boolean = false,
     val name: String,
     @Embedded val coord: Coord
 ) {
@@ -20,7 +23,8 @@ data class CityEntity (
         name = name,
         country = country,
         lat = coord.lat,
-        lon = coord.lon
+        lon = coord.lon,
+        isFavorite = favorite
     )
 }
 
